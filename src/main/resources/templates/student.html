@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CampusFix - Student Portal</title>
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>CampusFix</h1>
+
+    <h2>Student Portal</h2>
+
+    <nav>
+        <a href="/">Home</a> |
+        <a href="/student">Student Portal</a>
+    </nav>
+
+</header>
+
+<hr>
+
+<main>
+
+    <!-- ===================================================== -->
+    <!-- Message -->
+    <!-- ===================================================== -->
+
+    <section th:if="${message}">
+
+        <h2>System Message</h2>
+
+        <p>
+            <strong th:text="${message}">
+                Operation completed.
+            </strong>
+        </p>
+
+    </section>
+
+    <hr th:if="${message}">
+
+    <!-- ===================================================== -->
+    <!-- Report Issue -->
+    <!-- ===================================================== -->
+
+    <section>
+
+        <h2>Report a New Issue</h2>
+
+        <form action="/student/issues" method="post">
+
+            <fieldset>
+
+                <legend>Issue Details</legend>
+
+                <p>
+
+                    <label for="title">
+                        Issue Title:
+                    </label>
+
+                    <br>
+
+                    <input
+                            type="text"
+                            id="title"
+                            name="title"
+                            required>
+
+                </p>
+
+                <p>
+
+                    <label for="location">
+                        Location:
+                    </label>
+
+                    <br>
+
+                    <input
+                            type="text"
+                            id="location"
+                            name="location"
+                            required>
+
+                </p>
+
+                <p>
+
+                    <button type="submit">
+                        Report Issue
+                    </button>
+
+                    <button type="reset">
+                        Clear
+                    </button>
+
+                </p>
+
+            </fieldset>
+
+        </form>
+
+    </section>
+
+    <hr>
+
+    <!-- ===================================================== -->
+    <!-- Reported Issues -->
+    <!-- ===================================================== -->
+
+    <section>
+
+        <h2>Reported Issues</h2>
+
+        <table border="1">
+
+            <thead>
+
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Location</th>
+                <th>Status</th>
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            <tr th:each="issue : ${issues}">
+
+                <td th:text="${issue.id}">
+                    1
+                </td>
+
+                <td th:text="${issue.title}">
+                    Projector not working
+                </td>
+
+                <td th:text="${issue.location}">
+                    Block A
+                </td>
+
+                <td th:text="${issue.status}">
+                    OPEN
+                </td>
+
+            </tr>
+
+            <tr th:if="${#lists.isEmpty(issues)}">
+
+                <td colspan="4">
+                    No issues have been reported yet.
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+    <hr>
+
+    <!-- ===================================================== -->
+    <!-- Notifications -->
+    <!-- ===================================================== -->
+
+    <section>
+
+        <h2>My Notifications</h2>
+
+        <table border="1">
+
+            <thead>
+
+            <tr>
+                <th>ID</th>
+                <th>Message</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            <tr th:each="notification : ${notifications}">
+
+                <td th:text="${notification.id}">
+                    1
+                </td>
+
+                <td th:text="${notification.message}">
+                    This issue has already been reported.
+                </td>
+
+                <td th:text="${notification.type}">
+                    DUPLICATE_ISSUE
+                </td>
+
+                <td>
+
+                    <span th:if="${notification.read}">
+                        Read
+                    </span>
+
+                    <span th:unless="${notification.read}">
+                        Unread
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <form
+                            th:if="${!notification.read}"
+                            action="/student/notifications/read"
+                            method="post">
+
+                        <input
+                                type="hidden"
+                                name="notificationId"
+                                th:value="${notification.id}">
+
+                        <button type="submit">
+                            Mark as Read
+                        </button>
+
+                    </form>
+
+                    <span th:if="${notification.read}">
+                        Already Read
+                    </span>
+
+                </td>
+
+            </tr>
+
+            <tr th:if="${#lists.isEmpty(notifications)}">
+
+                <td colspan="5">
+                    You have no notifications.
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+</main>
+
+<hr>
+
+<footer>
+
+    <p>
+        CampusFix &copy; 2026
+    </p>
+
+</footer>
+
+</body>
+
+</html>

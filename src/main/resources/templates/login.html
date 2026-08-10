@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CampusFix - Login</title>
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>CampusFix</h1>
+
+    <h2>Login</h2>
+
+    <nav>
+        <a href="/">Home</a> |
+        <a href="/login">Login</a> |
+        <a href="/register">Register</a>
+    </nav>
+
+</header>
+
+<hr>
+
+<main>
+
+    <section>
+
+        <h2>Sign in to CampusFix</h2>
+
+        <div th:if="${message}">
+
+            <p>
+                <strong th:text="${message}">
+                    Registration successful.
+                </strong>
+            </p>
+
+        </div>
+
+        <div th:if="${error}">
+
+            <p>
+                <strong th:text="${error}">
+                    Invalid username or password.
+                </strong>
+            </p>
+
+        </div>
+
+        <form action="/login" method="post">
+
+            <fieldset>
+
+                <legend>Account Credentials</legend>
+
+                <p>
+
+                    <label for="username">
+                        Username:
+                    </label>
+
+                    <br>
+
+                    <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            required>
+
+                </p>
+
+                <p>
+
+                    <label for="password">
+                        Password:
+                    </label>
+
+                    <br>
+
+                    <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            required>
+
+                </p>
+
+                <p>
+
+                    <button type="submit">
+                        Login
+                    </button>
+
+                    <button type="reset">
+                        Clear
+                    </button>
+
+                </p>
+
+            </fieldset>
+
+        </form>
+
+    </section>
+
+    <hr>
+
+    <section>
+
+        <p>
+            Don't have an account?
+            <a href="/register">
+                Register as a student
+            </a>
+        </p>
+
+    </section>
+
+</main>
+
+<hr>
+
+<footer>
+
+    <p>
+        CampusFix &copy; 2026
+    </p>
+
+</footer>
+
+</body>
+
+</html>

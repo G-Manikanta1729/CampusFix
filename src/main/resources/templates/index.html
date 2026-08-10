@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CampusFix</title>
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>CampusFix</h1>
+
+    <h2>Campus Issue Management System</h2>
+
+    <nav>
+        <a href="/">Home</a> |
+        <a href="/login">Login</a>
+    </nav>
+
+</header>
+
+<hr>
+
+<main>
+
+    <section>
+
+        <h2 th:text="${message}">
+            Welcome to CampusFix
+        </h2>
+
+        <p>
+            CampusFix provides a simple platform for
+            reporting and managing campus issues.
+        </p>
+
+    </section>
+
+    <hr>
+
+    <section>
+
+        <h2>How CampusFix Works</h2>
+
+        <ol>
+
+            <li>
+                Students report campus issues.
+            </li>
+
+            <li>
+                CampusFix checks for duplicate issues.
+            </li>
+
+            <li>
+                Duplicate reports generate notifications.
+            </li>
+
+            <li>
+                Administrators manage and resolve issues.
+            </li>
+
+        </ol>
+
+    </section>
+
+    <hr>
+
+    <section>
+
+        <h2>Key Features</h2>
+
+        <ul>
+
+            <li>Issue reporting</li>
+
+            <li>CRUD-based issue management</li>
+
+            <li>Duplicate issue detection</li>
+
+            <li>Student notifications</li>
+
+            <li>Admin notifications</li>
+
+            <li>JWT authentication</li>
+
+            <li>Role-based authorization</li>
+
+            <li>MySQL persistence</li>
+
+        </ul>
+
+    </section>
+
+    <hr>
+
+    <section>
+
+        <h2>Get Started</h2>
+
+        <p>
+            <a href="/login">
+                Login to CampusFix
+            </a>
+        </p>
+
+    </section>
+
+</main>
+
+<hr>
+
+<footer>
+
+    <p>
+        CampusFix &copy; 2026
+    </p>
+
+</footer>
+
+</body>
+
+</html>

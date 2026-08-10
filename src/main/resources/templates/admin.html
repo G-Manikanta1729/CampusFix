@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CampusFix - Admin Portal</title>
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>CampusFix</h1>
+
+    <h2>Admin Portal</h2>
+
+    <nav>
+        <a href="/">Home</a> |
+        <a href="/admin">Admin Portal</a>
+    </nav>
+
+</header>
+
+<hr>
+
+<main>
+
+    <!-- =============================== -->
+    <!-- MESSAGE -->
+    <!-- =============================== -->
+
+    <section th:if="${message}">
+
+        <h3>System Message</h3>
+
+        <p>
+            <strong th:text="${message}">
+                Operation completed.
+            </strong>
+        </p>
+
+    </section>
+
+    <hr th:if="${message}">
+
+
+    <!-- =============================== -->
+    <!-- CAMPUS ISSUES -->
+    <!-- =============================== -->
+
+    <section>
+
+        <h2>Manage Campus Issues</h2>
+
+        <table border="1">
+
+            <thead>
+
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Location</th>
+                <th>Current Status</th>
+                <th>Update Status</th>
+                <th>Delete</th>
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            <tr th:each="issue : ${issues}">
+
+                <!-- ID -->
+
+                <td th:text="${issue.id}">
+                    1
+                </td>
+
+
+                <!-- TITLE -->
+
+                <td th:text="${issue.title}">
+                    Projector not working
+                </td>
+
+
+                <!-- LOCATION -->
+
+                <td th:text="${issue.location}">
+                    Block A - Room 204
+                </td>
+
+
+                <!-- CURRENT STATUS -->
+
+                <td th:text="${issue.status}">
+                    OPEN
+                </td>
+
+
+                <!-- UPDATE STATUS -->
+
+                <td>
+
+                    <form
+                            th:action="@{/admin/issues/{id}/status(id=${issue.id})}"
+                            method="post">
+
+                        <select name="status">
+
+                            <option
+                                    value="OPEN"
+                                    th:selected="${issue.status == 'OPEN'}">
+                                OPEN
+                            </option>
+
+                            <option
+                                    value="IN_PROGRESS"
+                                    th:selected="${issue.status == 'IN_PROGRESS'}">
+                                IN_PROGRESS
+                            </option>
+
+                            <option
+                                    value="RESOLVED"
+                                    th:selected="${issue.status == 'RESOLVED'}">
+                                RESOLVED
+                            </option>
+
+                        </select>
+
+                        <button type="submit">
+                            Update Status
+                        </button>
+
+                    </form>
+
+                </td>
+
+
+                <!-- DELETE -->
+
+                <td>
+
+                    <form
+                            th:action="@{/admin/issues/{id}/delete(id=${issue.id})}"
+                            method="post">
+
+                        <button type="submit">
+                            Delete
+                        </button>
+
+                    </form>
+
+                </td>
+
+            </tr>
+
+
+            <!-- NO ISSUES -->
+
+            <tr th:if="${#lists.isEmpty(issues)}">
+
+                <td colspan="6">
+                    No issues available.
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+
+    <hr>
+
+
+    <!-- =============================== -->
+    <!-- ADMIN NOTIFICATIONS -->
+    <!-- =============================== -->
+
+    <section>
+
+        <h2>Admin Notifications</h2>
+
+        <table border="1">
+
+            <thead>
+
+            <tr>
+                <th>ID</th>
+                <th>Message</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            <tr th:each="notification : ${notifications}">
+
+                <td th:text="${notification.id}">
+                    1
+                </td>
+
+                <td th:text="${notification.message}">
+                    A student reported an already existing issue.
+                </td>
+
+                <td th:text="${notification.type}">
+                    DUPLICATE_ISSUE
+                </td>
+
+                <td>
+
+                    <span th:if="${notification.read}">
+                        Read
+                    </span>
+
+                    <span th:unless="${notification.read}">
+                        Unread
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <form
+                            th:if="${!notification.read}"
+                            action="/admin/notifications/read"
+                            method="post">
+
+                        <input
+                                type="hidden"
+                                name="notificationId"
+                                th:value="${notification.id}">
+
+                        <button type="submit">
+                            Mark as Read
+                        </button>
+
+                    </form>
+
+                    <span th:if="${notification.read}">
+                        Already Read
+                    </span>
+
+                </td>
+
+            </tr>
+
+
+            <!-- NO NOTIFICATIONS -->
+
+            <tr th:if="${#lists.isEmpty(notifications)}">
+
+                <td colspan="5">
+                    No notifications available.
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+</main>
+
+<hr>
+
+<footer>
+
+    <p>
+        CampusFix &copy; 2026
+    </p>
+
+</footer>
+
+</body>
+
+</html>

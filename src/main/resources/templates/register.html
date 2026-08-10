@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CampusFix - Registration</title>
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>CampusFix</h1>
+
+    <h2>Student Registration</h2>
+
+    <nav>
+        <a href="/">Home</a> |
+        <a href="/login">Login</a> |
+        <a href="/register">Register</a>
+    </nav>
+
+</header>
+
+<hr>
+
+<main>
+
+    <section>
+
+        <h2>Create Student Account</h2>
+
+        <div th:if="${error}">
+
+            <p>
+                <strong th:text="${error}">
+                    Registration failed.
+                </strong>
+            </p>
+
+        </div>
+
+        <form action="/register" method="post">
+
+            <fieldset>
+
+                <legend>Registration Details</legend>
+
+                <p>
+
+                    <label for="username">
+                        Username:
+                    </label>
+
+                    <br>
+
+                    <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            required>
+
+                </p>
+
+                <p>
+
+                    <label for="password">
+                        Password:
+                    </label>
+
+                    <br>
+
+                    <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            required>
+
+                </p>
+
+                <p>
+
+                    <label>
+                        Role:
+                    </label>
+
+                    <br>
+
+                    Student
+
+                    <input
+                            type="hidden"
+                            name="role"
+                            value="STUDENT">
+
+                </p>
+
+                <p>
+
+                    <button type="submit">
+                        Register
+                    </button>
+
+                    <button type="reset">
+                        Clear
+                    </button>
+
+                </p>
+
+            </fieldset>
+
+        </form>
+
+    </section>
+
+    <hr>
+
+    <section>
+
+        <p>
+            Already have an account?
+            <a href="/login">
+                Login here
+            </a>
+        </p>
+
+    </section>
+
+</main>
+
+<hr>
+
+<footer>
+
+    <p>
+        CampusFix &copy; 2026
+    </p>
+
+</footer>
+
+</body>
+
+</html>
